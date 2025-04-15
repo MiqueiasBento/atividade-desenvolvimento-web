@@ -1,0 +1,158 @@
+/* Estilos gerais */
+body {
+    font-family: 'Roboto', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Header e navegação */
+header {
+    background-color: #d62828;
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#logo {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Roboto', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}
+
+#nav {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Seções */
+main {
+    margin-top: 80px;
+    padding: 2rem;
+}
+
+section {
+    padding: 2rem;
+    margin-bottom: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #d62828;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-family: 'Roboto', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #b99e9e;
+    margin-bottom: 1rem;
+    font-family: 'Roboto', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    font-family: 'Roboto', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Imagens */
+img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: 16rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+#bandeira {
+    height: 60px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 0.8rem;
+    text-align: left;
+    font-family: 'Roboto', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}
+
+th {
+    background-color: #003049;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Pre */
+pre {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 4px;
+    font-family: 'Roboto Mono', monospace;
+    white-space: pre-wrap;
+    margin: 1rem 0;
+}
+
+/* Footer */
+footer {
+    background-color: #003049;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    font-family: 'Roboto', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+}
