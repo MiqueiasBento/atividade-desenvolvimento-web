@@ -1,6 +1,7 @@
 # Blog
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+
 *ATIVIDADE 02 - DESENVOLVIMENTO DE SOFTWARE PARA WEB*
 **Objetivo**: Construir uma página de blog simples e responsiva utilizando HTML semântico e CSS. O foco é estruturar corretamente o conteúdo com tags semânticas e aplicar estilos básicos com CSS.
 
