@@ -4,54 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/style.css">
-    <title>Flexbox Web</title>
+    <link rel="stylesheet" href="styles/dark-mode.css" id="theme-style" disabled>
+    <title>Sudoku Blog</title>
 </head>
 <body>
-    <header id="header">
-        <h1>My WebSite</h1>
-        <h2>With a <strong>flexbox</strong> layout</h2>
+    <header>
+        <h1>Sudoku Blog</h1>
+        <h2>Dicas, estratégias e novidades do mundo do Sudoku</h2>
     </header>
 
-    <nav id="nav-bar">
-        <a href="">Link 1</a>
-        <a href="">Link 2</a>
-        <a href="">Link 3</a>
-        <a href="">Link 4</a>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#dicas">Dicas</a>
+        <a href="#estrategias">Estratégias</a>
+        <a href="#sobre">Sobre</a>
     </nav>
 
-    <div id="main">
-        <div id="left">
-            <h3>About me:</h3>
-            <p>Photo of me:</p>
-            <div class="image-photo-type1">
-                <p>Image</p>
-            </div>
-            <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+    <main>
+        <aside>
+            <section>
+                <h3>Sobre o Sudoku</h3>
+                <p>Autor: <strong>Howard Garns</strong></p>
+                <div class="image-photo-type1">
+                    <p>Imagem do Autor</p>
+                    <img src="https://puzzculture.com/wp-content/uploads/2021/08/maki-kaji-2.jpg?w=500" alt="Autor do sudoku">
+                </div>
+                <p>O Sudoku, como o conhecemos atualmente, foi criado em 1979 por <strong>Howard Garns</strong>, um arquiteto americano aposentado e construtor de quebra-cabeças. A base para o jogo pode ter sido o quadrado latino, um conceito matemático proposto por Leonhard Euler. .</p>
+            </section>
 
-            <h3>More text</h3>
-            <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-            <div class="image-photo-type2">
-                <p>Image</p>
-            </div>
-            <div class="image-photo-type2">
-                <p>Image</p>
-            </div>
-            <div class="image-photo-type2">
-                <p>Image</p>
-            </div>
-        </div>
-        <div id="right">
-            <h3>TITLE HEADING</h3>
-            <p>Title description, Dec 7, 2024</p>
+            <section>
+                <h3>O mundo do sudoku</h3>
+                <div class="image-photo-type2">
+                    <p>Aprenda como resolver seus primeiros desafios com as regras básicas, dicas de preenchimento e erros comuns que você pode evitar.</p>
+                    <img src="images/easy-sudoku-puzzle.png" alt="Comece pelo Básico">
+                </div>
+                <div class="image-photo-type2">
+                    <p>Explore técnicas intermediárias como pares ocultos, números candidatos e padrões de eliminação para avançar no jogo.</p>
+                    <img src="images/solving-sudoku-hard.png" alt="Desafie sua Lógica">
+                </div>
+                <div class="image-photo-type2">
+                    <p>Conheça a origem do Sudoku, desde seus primórdios na Europa até sua popularização nos jornais japoneses e competições internacionais.</p>
+                    <img src="images/sudoku-pelo-mundo.jpg" alt="Sudoku pelo Mundo">
+                </div>
+            </section>
+        </aside>
+
+        <article>
+            <h3>Dominando o Sudoku: Estratégias para Todos os Níveis</h3>
+            <p>Dicas de aprimoramento</p>
             <div class="image-photo-type1">
-                <p>Image</p>
+                <p>Tutorial sudoku</p>
+                <img src="https://www.dailystandard.com/sudoku/tutorial/graphics/figure_1_1.png" alt="Regras do sudoku">
             </div>
-            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis mostrud exercitation ullamco</p>
-        </div>
-    </div>
+            <p>
+                O Sudoku vai além de um simples passatempo: é um exercício poderoso de raciocínio lógico. Neste guia completo, você vai entender como o jogo funciona e quais estratégias aplicar conforme seu nível:
+                
+                <ul>
+                    <li><b>Iniciante:</b> aprenda as regras, como identificar números únicos e fazer anotações úteis.</li>
+                    <li><b>Intermediário:</b> use técnicas como "naked pairs", "hidden singles" e eliminação cruzada.</li>
+                    <li><b>Avançado:</b> descubra padrões como X-Wing, Swordfish e deduções condicionais.</li>
+                </ul>
+
+                Ao final, você será capaz de resolver desde quebra-cabeças simples até os mais desafiadores — com confiança e prazer.
+            </p>
+        </article>
+    </main>
 
     <footer>
-        <p>Footer</p>
+        <p>&copy; 2024 Sudoku Blog</p>
     </footer>
+
+    <button id="theme-toggle">Alternar Tema</button>
+
+    <script>
+        // Script para alternar entre os temas
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeStyle = document.getElementById('theme-style');
+        
+        themeToggle.addEventListener('click', () => {
+            themeStyle.disabled = !themeStyle.disabled;
+        });
+    </script>
 </body>
 </html>
