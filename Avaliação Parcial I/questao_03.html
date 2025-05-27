@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style-3.css">
+    <title>Visualizador de Pokémon</title>
+</head>
+<body>
+    <div class="container">
+        <img id="pokemonImage" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg" alt="Pokémon">
+        <div id="pokemonNumber">Pokémon #1</div>
+        <div class="buttons">
+            <button onclick="mudarPokemon(-1)">Voltar -1</button>
+            <button onclick="mudarPokemon(1)">Adiantar +1</button>
+        </div>
+    </div>
+
+    <script>
+        let numeroAtual = 1;
+        const imagem = document.getElementById('pokemonImage');
+        const numeroDisplay = document.getElementById('pokemonNumber');
+
+        function mudarPokemon(valor) {
+            const novoNumero = numeroAtual + valor;
+            
+            // Verifica se o novo número está dentro dos limites
+            if (novoNumero >= 1 && novoNumero <= 100) {
+                numeroAtual = novoNumero;
+                const novaUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${numeroAtual}.svg`;
+                imagem.src = novaUrl;
+                numeroDisplay.textContent = `Pokémon #${numeroAtual}`;
+            }
+        }
+    </script>
+</body>
+</html> 
