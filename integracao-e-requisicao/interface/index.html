@@ -5,24 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alunos</title>
     <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 8px;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            background-color: #f4f4f4;
+        }
         table {
-            width: 100%;
+            width: 800px;
             border-collapse: collapse;
         }
         th, td {
-            border: 1px solid #ddd;
+            border: 1px solid #2c2c2c;
             padding: 8px;
             text-align: left;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #77a805;
         }
     </style>
 </head>
 <body>
     <div id="table-container">
-
     </div>
+
     <script>
         async function findAll() {
             try {
@@ -45,18 +56,26 @@
                     `
                 
                 // 4. Insere uma linha para cada aluno
-                alunos.forEach(aluno => {
+                if (alunos.length === 0) {
                     const linha = table.insertRow();
+                    const cell = linha.insertCell();
+                    cell.colSpan = 3;
+                    cell.textContent = "Nenhum aluno encontrado";
+                    cell.style.textAlign = "center";
+                } else {
+                    alunos.forEach(aluno => {
+                        const linha = table.insertRow();
 
-                    const nomeCell = linha.insertCell();
-                    nomeCell.textContent = aluno.nome;
+                        const nomeCell = linha.insertCell();
+                        nomeCell.textContent = aluno.nome;
 
-                    const cursoCell = linha.insertCell();
-                    cursoCell.textContent = aluno.curso;
+                        const cursoCell = linha.insertCell();
+                        cursoCell.textContent = aluno.curso;
 
-                    const iraCell = linha.insertCell();
-                    iraCell.textContent = aluno.ira;
-                });
+                        const iraCell = linha.insertCell();
+                        iraCell.textContent = aluno.ira;
+                    });
+                }
 
                 // 5. Adiciona a tabela à página
                 const divTable = document.getElementById("table-container");
@@ -64,7 +83,23 @@
                 divTable.appendChild(table);    // Adiciona a tabela ao container
             } catch (error) {
                 console.error(error)
-                document.getElementById("table-container").innerHTML = "<p>Erro ao carregar dados.</p>"
+
+                const table = document.createElement("table");
+                const header = table.insertRow()
+                    header.innerHTML = `
+                        <th>Nome</th>
+                        <th>Curso</th>
+                        <th>IRA</th>
+                    `
+                const linha = table.insertRow();
+                const cell = linha.insertCell();
+                cell.colSpan = 3;
+                cell.textContent = "sem dados para carregar";
+                cell.style.textAlign = "center";
+                
+                const divTable = document.getElementById("table-container");
+                divTable.innerHTML = "";        // Limpa o conteúdo anterior
+                divTable.appendChild(table);    // Adiciona a tabela ao container
             }
         }
 
