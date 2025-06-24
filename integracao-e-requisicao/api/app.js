@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 
 module.exports = app;
 app.use('/', alunoRouter); // Define a rota para alunos
-app.use('/', usersRouter);
+// app.use('/', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
