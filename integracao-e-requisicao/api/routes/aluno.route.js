@@ -24,4 +24,13 @@ router.get(
     }
 )
 
+router.post(
+    "/alunos",
+    (request, response) => {
+        const novoAluno = request.body;
+        const alunoCriado = AlunoService.create(novoAluno);     // criar um novo aluno
+        response.status(201).json(alunoCriado);                 // retorna o aluno criado com status 201
+    }
+)
+
 module.exports = router;
