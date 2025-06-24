@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alunos</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div id="table-container">
+
+    </div>
+    <script>
+        async function findAll() {
+            try {
+                // 1. Faz a requisição
+                const response = await fetch("http://localhost:3000/alunos");
+                if (!response.ok) {
+                    throw new Error("Erro ao buscar alunos");
+                }
+                
+                // 2. Converte a resposta para JSON
+                const alunos = await response.json();
+
+                // 3. Cria a tabela e o cabeçalho
+                const table = document.createElement("table");
+                const header = table.insertRow()
+                    header.innerHTML = `
+                        <th>Nome</th>
+                        <th>Curso</th>
+                        <th>IRA</th>
+                    `
+                
+                // 4. Insere uma linha para cada aluno
+                alunos.forEach(aluno => {
+                    const linha = table.insertRow();
+
+                    const nomeCell = linha.insertCell();
+                    nomeCell.textContent = aluno.nome;
+
+                    const cursoCell = linha.insertCell();
+                    cursoCell.textContent = aluno.curso;
+
+                    const iraCell = linha.insertCell();
+                    iraCell.textContent = aluno.ira;
+                });
+
+                // 5. Adiciona a tabela à página
+                const divTable = document.getElementById("table-container");
+                divTable.innerHTML = "";        // Limpa o conteúdo anterior
+                divTable.appendChild(table);    // Adiciona a tabela ao container
+            } catch (error) {
+                console.error(error)
+                document.getElementById("table-container").innerHTML = "<p>Erro ao carregar dados.</p>"
+            }
+        }
+
+        // Chama a função ao carregar a página
+        findAll()
+    </script>
+</body>
+</html>
