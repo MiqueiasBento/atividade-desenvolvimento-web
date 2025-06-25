@@ -11,7 +11,7 @@
     <div class="forms">
         <h1>Atualizar Aluno</h1>
         <form id="form-aluno">
-            <label>Nome do aluno atual: <input type="text" name="nome" required></label>
+            <label>Nome do aluno atual: <input type="text" name="nomeAtual" required></label>
             <br>
             <label>Nome: <input type="text" name="nome" required></label>
             <label>Curso: <input type="text" name="curso" required></label>
@@ -27,7 +27,7 @@
         document.getElementById("form-aluno").addEventListener("submit", async function (event) {
             event.preventDefault();
             const form = event.target;
-            const nomeAtual = form["nome"].value;
+            const nomeAtual = form["nomeAtual"].value;
             // Os campos seguintes são os novos dados
             const inputs = form.querySelectorAll("input");
             const novoNome = inputs[1].value;
