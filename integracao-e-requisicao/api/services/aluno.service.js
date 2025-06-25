@@ -7,25 +7,25 @@ class AlunoService {
         return Aluno;
     }
 
-    static getById(id) {
-        return Aluno.find(aluno => aluno.id === id);
+    static getByNome(nome) {
+        return Aluno.find(aluno => aluno.nome === nome);
     }
 
     static create(novoAluno) {
-        // Verifica se o novo aluno já existe
-        const alunoExistente = Aluno.find(aluno => aluno.id === novoAluno.id);
+        // Verifica se o novo aluno já existe pelo nome
+        const alunoExistente = Aluno.find(aluno => aluno.nome === novoAluno.nome);
         if (alunoExistente) {
             throw new Error('Aluno já existe');
         }
 
         // Cria um novo aluno
-        const alunoCriado = new AlunoModel(novoAluno.id, novoAluno.nome, novoAluno.email);
+        const alunoCriado = new AlunoModel(novoAluno.nome, novoAluno.curso, novoAluno.ira);
         Aluno.push(alunoCriado);
         return alunoCriado;
     }
     
-    static update(id, alunoAtualizado) {
-        const index = Aluno.findIndex(aluno => aluno.id === id);
+    static update(nome, alunoAtualizado) {
+        const index = Aluno.findIndex(aluno => aluno.nome === nome);
         if (index === -1) {
             throw new Error('Aluno não encontrado');
         }
@@ -34,8 +34,8 @@ class AlunoService {
         return Aluno[index];
     }
 
-    static delete(id) {
-        const index = Aluno.findIndex(aluno => aluno.id === id);
+    static delete(nome) {
+        const index = Aluno.findIndex(aluno => aluno.nome === nome);
         if (index === -1) {
             throw new Error('Aluno não encontrado');
         }
