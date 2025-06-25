@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style-delete.css">
+    <title>Deleção de aluno</title>
+    
+</head>
+<body>
+    <div class="forms">
+        <h1>Deletar Aluno</h1>
+        <form id="form-aluno">
+            <label>Nome: <input type="text" name="nome" required></label>
+            <button class="submit" type="submit">Deletar</button>
+        </form>
+
+        <p id="mensagem"></p>
+        <button class="voltar" onclick="window.location.href='index.html'">Voltar à tela inicial</button>
+    </div>
+
+    <script>
+        document.getElementById("form-aluno").addEventListener("submit", async function (event) {
+            event.preventDefault();
+            const form = event.target;
+            const nome = form.nome.value;
+            try {
+                const response = await fetch(`http://localhost:3000/alunos/${encodeURIComponent(nome)}`, {
+                    method: "DELETE"
+                });
+                const resultado = await response.json();
+                if (response.ok) {
+                    document.getElementById("mensagem").textContent = "Aluno deletado com sucesso!";
+                    form.reset();
+                } else {
+                    document.getElementById("mensagem").textContent = resultado.erro || "Erro ao deletar";
+                }
+            } catch (error) {
+                console.error(error);
+                document.getElementById("mensagem").textContent = "Erro na requisição";
+            }
+        });
+    </script>
+</body>
+</html>
