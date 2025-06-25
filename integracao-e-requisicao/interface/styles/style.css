@@ -1,12 +1,15 @@
 * {
     box-sizing: border-box;
     font-family: Arial, sans-serif;
+    font-size: 16px;
     margin: 0;
     padding: 8px;
 }
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     background-color: #f4f4f4;
 }
 table {
@@ -14,10 +17,30 @@ table {
     border-collapse: collapse;
 }
 th, td {
-    border: 1px solid #2c2c2c;
+    border: 2px solid #3b3b3b;
     padding: 8px;
     text-align: left;
 }
 th {
     background-color: #77a805;
+}
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+}
+.action-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 2px solid #3b3b3b;
+    color: #3b3b3b;
+    padding: 8px;
+    transition: background 0.2s, border 0.2s;
+}
+.action-button:hover {
+    background: #77a805;
+    color: #fff;
+    border-color: #5e8604;
 }
