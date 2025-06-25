@@ -4,6 +4,9 @@
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)  
 
+## Interface inicial
+![Interface](https://github.com/MiqueiasBento/atividade-desenvolvimento-web/blob/main/Atividade%2005%20-%20Integracao%20e%20Requisicao/images/image.png)
+
 ## Descrição
 Esta atividade consiste em um sistema simples de cadastro, listagem, atualização e deleção de alunos, utilizando integração entre uma API Node.js (Express) e uma interface web (HTML, CSS e JS).
 
