@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style-cadastro.css">
+    <title>Atualizar de aluno</title>
+    
+</head>
+<body>
+    <div class="forms">
+        <h1>Atualizar Aluno</h1>
+        <form id="form-aluno">
+            <label>Nome do aluno atual: <input type="text" name="nome" required></label>
+            <br>
+            <label>Nome: <input type="text" name="nome" required></label>
+            <label>Curso: <input type="text" name="curso" required></label>
+            <label>IRA: <input type="number" step="0.1" name="ira" required></label>
+            <button class="submit" type="submit">Atualizar</button>
+        </form>
+
+        <p id="mensagem"></p>
+        <button class="voltar" onclick="window.location.href='index.html'">Voltar à tela inicial</button>
+    </div>
+
+    <script>
+        document.getElementById("form-aluno").addEventListener("submit", async function (event) {
+            event.preventDefault();
+            const form = event.target;
+            const nomeAtual = form["nome"].value;
+            // Os campos seguintes são os novos dados
+            const inputs = form.querySelectorAll("input");
+            const novoNome = inputs[1].value;
+            const curso = inputs[2].value;
+            const ira = parseFloat(inputs[3].value);
+            const alunoAtualizado = {
+                nome: novoNome,
+                curso: curso,
+                ira: ira
+            };
+            try {
+                const response = await fetch(`http://localhost:3000/alunos/${encodeURIComponent(nomeAtual)}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(alunoAtualizado)
+                });
+                const resultado = await response.json();
+                if (response.ok) {
+                    document.getElementById("mensagem").textContent = "Aluno atualizado com sucesso!";
+                    form.reset();
+                } else {
+                    document.getElementById("mensagem").textContent = resultado.erro || "Erro ao atualizar";
+                }
+            } catch (error) {
+                console.error(error);
+                document.getElementById("mensagem").textContent = "Erro na requisição";
+            }
+        });
+    </script>
+</body>
+</html>
