@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/style-estados.css"">
+    <title>Covid19 - Estados Brasileiros</title>
+</head>
+<body>
+    <h1>Covid19 - Estados Brasileiros</h1>
+    <table id="tabela-estados">
+        <thead>
+            <tr>
+                <th>Nome do Estado</th>
+                <th>Abreviação</th>
+                <th>Número de Casos</th>
+                <th>Número de Suspeitos</th>
+                <th>Número de Falecimentos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dados serão inseridos aqui -->
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2">Média</td>
+                <td id="media-casos"></td>
+                <td id="media-suspeitos"></td>
+                <td id="media-falecimentos"></td>
+            </tr>
+        </tfoot>
+    </table>
+    <br>
+    <div id="relacoes"></div>
+    <script>
+        async function carregarDados() {
+            const resposta = await fetch('https://covid19-brazil-api.vercel.app/api/report/v1');
+            const dados = await resposta.json();
+            const estados = dados.data;
+
+            const tbody = document.querySelector('#tabela-estados tbody');
+            tbody.innerHTML = '';
+
+            let somaCasos = 0, somaSuspeitos = 0, somaFalecimentos = 0;
+            let maiorRelacao = -Infinity, menorRelacao = Infinity;
+            let estadoMaiorRelacao = '', estadoMenorRelacao = '';
+
+            // Primeiro, calcular as somas e relações
+            estados.forEach(estado => {
+                somaCasos += estado.cases;
+                somaSuspeitos += estado.suspects;
+                somaFalecimentos += estado.deaths;
+                let relacao = estado.deaths > 0 ? estado.cases / estado.deaths : 0;
+                if (relacao > maiorRelacao) {
+                    maiorRelacao = relacao;
+                    estadoMaiorRelacao = estado.state;
+                }
+                if (estado.deaths > 0 && relacao < menorRelacao) {
+                    menorRelacao = relacao;
+                    estadoMenorRelacao = estado.state;
+                }
+            });
+
+            const mediaCasos = somaCasos / estados.length;
+            const mediaSuspeitos = somaSuspeitos / estados.length;
+            const mediaFalecimentos = somaFalecimentos / estados.length;
+
+            // Agora, montar as linhas da tabela
+            estados.forEach(estado => {
+                const tr = document.createElement('tr');
+                if (estado.deaths > mediaFalecimentos) {
+                    tr.classList.add('acima-media');
+                }
+                tr.innerHTML = `
+                    <td>${estado.state}</td>
+                    <td>${estado.uf}</td>
+                    <td>${estado.cases}</td>
+                    <td>${estado.suspects}</td>
+                    <td>${estado.deaths}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Preencher médias
+            document.getElementById('media-casos').textContent = mediaCasos.toFixed(2);
+            document.getElementById('media-suspeitos').textContent = mediaSuspeitos.toFixed(2);
+            document.getElementById('media-falecimentos').textContent = mediaFalecimentos.toFixed(2);
+
+            // Relações Casos/Falecimentos
+            document.getElementById('relacoes').innerHTML = `
+                <strong>Maior relação Casos/Falecimentos:</strong> ${estadoMaiorRelacao} (${maiorRelacao.toFixed(2)})<br>
+                <strong>Menor relação Casos/Falecimentos:</strong> ${estadoMenorRelacao} (${menorRelacao.toFixed(2)})
+            `;
+        }
+        carregarDados();
+    </script>
+</body>
+</html>
