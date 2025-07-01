@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/style-estados.css">
+    <title>Covid19 - Países</title>
+    <style>
+        .brasil {
+            background-color: #b6ffb6 !important;
+        }
+    </style>
+</head>
+<body>
+    <h1>Covid19 - Países</h1>
+    <table id="tabela-paises">
+        <thead>
+            <tr>
+                <th>Nome do País</th>
+                <th>Código</th>
+                <th>Número de Casos</th>
+                <th>Número de Suspeitos</th>
+                <th>Número de Falecimentos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dados serão inseridos aqui -->
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2">Média</td>
+                <td id="media-casos"></td>
+                <td id="media-suspeitos"></td>
+                <td id="media-falecimentos"></td>
+            </tr>
+        </tfoot>
+    </table>
+    <script>
+        async function carregarDados() {
+            const resposta = await fetch('https://covid19-brazil-api.vercel.app/api/report/v1/countries');
+            const dados = await resposta.json();
+            const paises = dados.data;
+
+            const tbody = document.querySelector('#tabela-paises tbody');
+            tbody.innerHTML = '';
+
+            let somaCasos = 0, somaSuspeitos = 0, somaFalecimentos = 0;
+
+            paises.forEach(pais => {
+                somaCasos += pais.cases || 0;
+                somaSuspeitos += pais.suspects || 0;
+                somaFalecimentos += pais.deaths || 0;
+            });
+
+            const mediaCasos = somaCasos / paises.length;
+            const mediaSuspeitos = somaSuspeitos / paises.length;
+            const mediaFalecimentos = somaFalecimentos / paises.length;
+
+            paises.forEach(pais => {
+                const tr = document.createElement('tr');
+                if (pais.country.toLowerCase() === 'brazil' || pais.country.toLowerCase() === 'brasil') {
+                    tr.classList.add('brasil');
+                }
+                tr.innerHTML = `
+                    <td>${pais.country}</td>
+                    <td>${pais.countryCode || ''}</td>
+                    <td>${pais.cases ?? '-'}</td>
+                    <td>${pais.suspects ?? '-'}</td>
+                    <td>${pais.deaths ?? '-'}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('media-casos').textContent = mediaCasos.toFixed(2);
+            document.getElementById('media-suspeitos').textContent = mediaSuspeitos.toFixed(2);
+            document.getElementById('media-falecimentos').textContent = mediaFalecimentos.toFixed(2);
+        }
+        carregarDados();
+    </script>
+</body>
+</html> 
