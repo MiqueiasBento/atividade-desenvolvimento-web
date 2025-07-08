@@ -39,3 +39,39 @@ async function buscarProdutos() {
 }
 
 buscarProdutos();
+
+document.getElementById('cadastro-produtos').addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const produto = {
+        nome: form.nome.value,
+        descricao: form.descricao.value,
+        categoria: form.preco.value,
+        preco: parseFloat(form.preco.value),
+        quantidade: form.quantidade.value
+    }
+
+    try {
+        const response = await fetch("http://localhost:3000/produtos", {
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": JSON.stringify(produto)
+        });
+
+        const data = await response.json();
+
+        if(response.ok) {
+            document.getElementById('resposta').textContent = 'Produto cadastrado com sucesso';
+            document.getElementById('resposta').style.color = 'green';
+            form.reset();
+            buscarProdutos();
+        }
+    } catch(error) {
+        console.error(error);
+        document.getElementById('resposta').textContent = 'Erro ao cadastrar produto: ' + error;
+        document.getElementById('resposta').style.color = 'red';
+    }
+});
